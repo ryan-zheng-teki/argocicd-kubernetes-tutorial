@@ -45,4 +45,4 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/qiusuo-data/mysql-1"
+    path: "/qiusuo/data"
