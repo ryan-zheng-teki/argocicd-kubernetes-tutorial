@@ -26,4 +26,4 @@ spec:
       volumes:
         - name: pv-data
           persistentVolumeClaim:
-            claimName: pvc-local-test
+            claimName: pvc-volume-test
