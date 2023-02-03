@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myflask
+  labels:
+    app: myflask
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: myflask
+  template:
+    metadata:
+      labels:
+        app: myflask
+    spec:
+      containers:
+        - name: myflask
+          image: myflask:v1
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 5000
+          volumeMounts:
+          - name: minikube-hostvolume
+            mountPath: /tmp
+      volumes:
+      - name: minikube-hostvolume
+        persistentVolumeClaim:
+          claimName: minikuber-hostvolume-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myflask-service
+spec:
+  type: NodePort
+  ports:
+    - name: 5000-5000
+      port: 5000
+      protocol: TCP
+      targetPort: 5000
+      nodePort: 30080
+  selector:
+    app: myflask
+  sessionAffinity: None
