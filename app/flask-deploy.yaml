@@ -5,7 +5,7 @@ metadata:
   labels:
     app: myflask
 spec:
-  replicas: 5
+  replicas: 1
   selector:
     matchLabels:
       app: myflask
@@ -27,6 +27,13 @@ spec:
       - name: minikube-hostvolume
         persistentVolumeClaim:
           claimName: minikuber-hostvolume-claim
+
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+
 ---
 apiVersion: v1
 kind: Service

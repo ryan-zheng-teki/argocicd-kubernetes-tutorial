@@ -1,0 +1,7 @@
+kubectl create namespace staging
+kubectl create namespace integration
+kubectl create namespace production
+kubectl patch deployment myflask -p '{"spec":{"replicas":1}}'
+
+A very good tutorial
+https://www.kubecost.com/kubernetes-autoscaling/kubernetes-hpa/

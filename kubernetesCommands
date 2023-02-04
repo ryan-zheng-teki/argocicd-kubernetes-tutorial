@@ -1,3 +1,0 @@
-kubectl create namespace staging
-kubectl create namespace integration
-kubectl create namespace production

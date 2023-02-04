@@ -1,0 +1,36 @@
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: flask-app-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: myflask
+  minReplicas: 1
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 50
+  - type: External
+    external:
+      metricName: node_cpu_utilization
+      targetValue: 20
+      minReplicas: 1
+      maxReplicas: 10
+      scaleUp:
+        stabilizeDurationSeconds: 30
+        policies:
+        - type: Value
+          value: 99
+          operator: LessThan
+      scaleDown:
+        stabilizeDurationSeconds: 30
+        policies:
+        - type: Value
+          value: 99
+          operator: GreaterThan
