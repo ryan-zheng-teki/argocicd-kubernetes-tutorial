@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: myflask
-          image: myflask:v1
+          image: myflask:34fd7bea72ab062aceed5efbb35149986861fed6
           imagePullPolicy: Never
           ports:
             - containerPort: 5000
@@ -27,7 +27,6 @@ spec:
       - name: minikube-hostvolume
         persistentVolumeClaim:
           claimName: minikuber-hostvolume-claim
-
   strategy:
     type: RollingUpdate
     rollingUpdate:

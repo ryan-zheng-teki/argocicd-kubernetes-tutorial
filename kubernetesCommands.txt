@@ -5,3 +5,6 @@ kubectl patch deployment myflask -p '{"spec":{"replicas":1}}'
 
 A very good tutorial
 https://www.kubecost.com/kubernetes-autoscaling/kubernetes-hpa/
+
+Where can you see the source code for kubernetes Pod?
+https://github.com/kubernetes/kubernetes
