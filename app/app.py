@@ -4,7 +4,6 @@ import itertools
 import math
 random.seed(10)
 
-
 def heavy_compute():
     list1=[random.randint(1, 100) for i in range(10000)]
     list2=[random.randint(1, 10) for i in range(100)]

@@ -19,6 +19,11 @@ spec:
             echo -n "Starting with a fresh state"
           fi
           while sleep 5; do date | tee -a /persistent/log; done
+    - name: redis-container
+      image: redis:latest
+      ports:
+      - containerPort: 6379
+
   volumes:
   - name: quobytevolume
     emptyDir: {}
