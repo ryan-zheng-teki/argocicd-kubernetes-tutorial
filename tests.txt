@@ -1,0 +1,2 @@
+192.168.49.2 myflask-service.com
+192.168.49.2 myflask-service.com

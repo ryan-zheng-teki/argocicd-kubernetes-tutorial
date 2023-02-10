@@ -3,12 +3,13 @@ kind: PersistentVolume
 metadata:
   name: minikube-hostvolume
 spec:
+  storageClassName: manual
   capacity:
     storage: 10Gi
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: /home/ryan/miniHDD/Learning/kubernetes/k8s-test/minikube-host-path
+    path: /flaskapp
   persistentVolumeReclaimPolicy: Retain
 
 ---
@@ -18,11 +19,9 @@ kind: PersistentVolumeClaim
 metadata:
   name: minikuber-hostvolume-claim
 spec:
+  storageClassName: manual
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
       storage: 10Gi
-  selector:
-    matchLabels:
-      name: minikube-hostvolume

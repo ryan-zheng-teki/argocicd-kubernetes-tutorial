@@ -25,6 +25,7 @@ def hello():
             heavy_compute()
             time_spent = time.time() - start_time
             response = f"Time spent in compute() function: {time_spent} seconds"
+            response = response + "\n test rolling update"
             f.write(response)
             return response + "\n"
     except Exception as e:

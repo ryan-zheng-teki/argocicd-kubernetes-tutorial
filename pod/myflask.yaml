@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myflask
+spec:
+  containers:
+    - name: myflask
+      image: myflask:34fd7bea72ab062aceed5efbb35149986861fed6
+      imagePullPolicy: Never
+      ports:
+        - containerPort: 5000
+      volumeMounts:
+      - name: minikube-hostvolume
+        mountPath: /tmp
+  volumes:
+  - name: minikube-hostvolume
+    persistentVolumeClaim:
+      claimName: minikuber-hostvolume-claim
