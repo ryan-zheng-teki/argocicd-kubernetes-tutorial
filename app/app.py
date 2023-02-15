@@ -19,7 +19,7 @@ def heavy_compute():
 app = FastAPI()
 
 @app.get("/")
-def hello():
+async def hello():
     file_name = "/tmp/test.txt"
     try:
         with open(file_name, "w+") as f:
