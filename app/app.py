@@ -1,8 +1,11 @@
-from flask import Flask
 import random
 import itertools
 import math
+from typing import Union
+
+from fastapi import FastAPI
 random.seed(10)
+
 
 def heavy_compute():
     list1=[random.randint(1, 100) for i in range(10000)]
@@ -13,9 +16,9 @@ def heavy_compute():
     result=[math.factorial(x[0]+x[1]) for x in permutation] # The complex operation (factorial of the sum)
     return result
 
-app = Flask(__name__)
+app = FastAPI()
 
-@app.route("/")
+@app.get("/")
 def hello():
     file_name = "/tmp/test.txt"
     try:

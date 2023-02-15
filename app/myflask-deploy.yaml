@@ -16,8 +16,8 @@ spec:
     spec:
       containers:
         - name: myflask
-          image: myflask:34fd7bea72ab062aceed5efbb35149986861fed6
-          imagePullPolicy: Never
+          image: myflask:2f66c5fc5dccf61bf85d5ca95e7f464f70b1f631
+          imagePullPolicy: Always
           ports:
             - containerPort: 5000
           volumeMounts:
