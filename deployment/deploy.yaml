@@ -16,8 +16,8 @@ spec:
     spec:
       containers:
         - name: myflask
-          image: myflask:2f66c5fc5dccf61bf85d5ca95e7f464f70b1f631
-          imagePullPolicy: Always
+          image: myflask:ce96a329b47973b6fed7565f09686f2d3066e7b2
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5000
           volumeMounts:
@@ -32,20 +32,3 @@ spec:
     rollingUpdate:
       maxUnavailable: 1
       maxSurge: 1
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: myflask-service
-spec:
-  ports:
-    - name: 5000-5000
-      port: 5000
-      protocol: TCP
-      targetPort: 5000
-  selector:
-    app: myflask
-  sessionAffinity: None
-  type: ClusterIP
-
