@@ -41,6 +41,8 @@ k6 run loadtest.js
 helm install myflask . --namespace [namespace-name]
 helm uninstall myflask  # to uninstall
 helm list --namespace [namespace-name]
+
+helm upgrade -f myflask/values.yaml myflask  ./myflask -n [namespace-name] # upgrade helm chart
 ```
 
 
