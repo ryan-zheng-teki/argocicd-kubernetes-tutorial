@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1
+kind: Application
+metadata:
+  name: myflask
+spec:
+  destination:
+    namespace: staging
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: deployment
+    repoURL: https://github.com/ryan-zheng-teki/kubernetes-tutorial.git
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+  health: {}
+  plugin:
+    env: {}
+  syncWave: 1
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io

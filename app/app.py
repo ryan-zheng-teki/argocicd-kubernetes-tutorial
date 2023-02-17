@@ -29,9 +29,11 @@ async def hello():
             time_spent = time.time() - start_time
             response = f"Time spent in compute() function: {time_spent} seconds"
             response = response + "\n test rolling update"
+            assert 1 == 0
             f.write(response)
             return response + "\n"
     except Exception as e:
+        assert 1 == 0
         return "open file failed"
 
        
