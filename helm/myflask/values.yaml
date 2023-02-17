@@ -8,7 +8,7 @@ image:
   repository: myflask
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ce96a329b47973b6fed7565f09686f2d3066e7b2
+  tag: 972ca64de33fecc377305eea7073fcfbc56bd4c0
 
 imagePullSecrets: []
 nameOverride: ""
