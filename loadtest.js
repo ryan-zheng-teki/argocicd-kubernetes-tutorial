@@ -7,7 +7,7 @@ export let options = {
 };
 
 export default function() {
-  let response = http.get("http://myflask-service.com/");
+  let response = http.get("http://myflask-service.com/compute");
   check(response, {
     "status is 200": (r) => r.status === 200
   });

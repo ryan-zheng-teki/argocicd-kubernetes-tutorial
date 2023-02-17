@@ -18,7 +18,7 @@ def heavy_compute():
 
 app = FastAPI()
 
-@app.get("/")
+@app.get("/compute")
 async def hello():
     file_name = "/tmp/test.txt"
     try:
@@ -34,4 +34,8 @@ async def hello():
     except Exception as e:
         return "open file failed"
 
+
+@app.get("/health")
+async def health():
+    return "OK"
        

@@ -38,11 +38,12 @@ k6 run loadtest.js
 `cd helm/myflask`
 
 ```javascript
-helm install myflask . --namespace [namespace-name]
+helm install myflask . -n staging
 helm uninstall myflask  # to uninstall
 helm list --namespace [namespace-name]
 
 helm upgrade -f myflask/values.yaml myflask  ./myflask -n [namespace-name] # upgrade helm chart
+helm install myflask . --debug --dry-run # use dry run to see the helm chart values
 ```
 
 
