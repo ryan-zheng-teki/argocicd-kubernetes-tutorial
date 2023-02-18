@@ -8,7 +8,7 @@ image:
   repository: myflask
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: 1bd199d7987fc8b7f4341e65e5191bb4f6d5a1d1
+  tag: 86d26614aa6aff8dad2fb3e960d0dafbb08765cb
 
 imagePullSecrets: []
 nameOverride: ""
@@ -64,13 +64,14 @@ resources:
   limits:
     cpu: 950m
   requests:
-    cpu: 500m
+    cpu: 600m
 
 autoscaling:
   enabled: true
   minReplicas: 1
   maxReplicas: 7
-  targetCPUUtilizationPercentage: 50
+  #targetCPUUtilizationPercentage: 80
+  targetAverageValue: 400
   # targetMemoryUtilizationPercentage: 80
 
 nodeSelector: {}
