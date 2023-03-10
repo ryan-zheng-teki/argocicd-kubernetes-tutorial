@@ -45,6 +45,16 @@ helm list --namespace [namespace-name]
 helm upgrade -f myflask/values.yaml myflask  ./myflask -n staging # upgrade helm chart
 helm install myflask . --debug --dry-run # use dry run to see the helm chart values
 ```
+helm upgrade -f values.yaml 
+
+## Use helm to deploy ingress
+
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx # add repo for ingress-nginx 
+helm search repo ingress-nginx search charts in repo
+helm pull ingress-nginx/ingress-nginx  # this will pull the chart to local system, then we can update the chart
+helm upgrade -f values.yaml --install ingress-nginx ingress-nginx \
+  --repo https://kubernetes.github.io/ingress-nginx \
+  --namespace ingress-nginx --create-namespace
 
 
 Installation Of Argo Workflow And ArgoCD To Build A Pipeline
@@ -56,6 +66,8 @@ Use Argo Workflow To Create CI Pipeline
 
 
 Use ArgoCD to deploy the built image \n 
+
+
 
 
 
