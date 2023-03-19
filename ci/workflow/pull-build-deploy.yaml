@@ -1,0 +1,60 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: build-and-push-
+spec:
+  entrypoint: build-and-push
+  templates:
+    - name: build-and-push
+      steps:
+        - - name: checkout
+            template: git-checkout
+        - - name: build-and-push
+            template: docker-build-push
+      volumes:
+        - name: docker-sock
+          hostPath:
+            path: /var/run/docker.sock
+    - name: git-checkout
+      container:
+        image: argoproj/git:v1.0.0
+        command: [git]
+        args: ["clone", "{{inputs.parameters.repoUrl}}", "--branch", "{{inputs.parameters.branch}}", "--depth", "1", "/workspace/git-repo"]
+        volumeMounts:
+          - name: workdir
+            mountPath: /workspace
+      outputs:
+        artifacts:
+          - name: git-repo
+            path: /workspace/git-repo
+    - name: docker-build-push
+      inputs:
+        artifacts:
+          - name: git-repo
+            path: /workspace/git-repo
+      container:
+        image: docker:20.10.9
+        command: [sh, -c]
+        args:
+          - |
+            docker build -t {{inputs.parameters.imageName}}:{{inputs.parameters.tag}} /workspace/git-repo
+            docker login -u {{inputs.parameters.registryUsername}} -p {{inputs.parameters.registryPassword}} {{inputs.parameters.registry}}
+            docker push {{inputs.parameters.imageName}}:{{inputs.parameters.tag}}
+        volumeMounts:
+          - name: workdir
+            mountPath: /workspace
+          - name: docker-sock
+            mountPath: /var/run/docker.sock
+      inputs:
+        parameters:
+          - name: imageName
+          - name: tag
+          - name: registry
+          - name: registryUsername
+          - name: registryPassword
+      volumes:
+        - name: workdir
+          emptyDir: {}
+        - name: docker-sock
+          hostPath:
+            path: /var/run/docker.sock

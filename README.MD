@@ -10,6 +10,10 @@ eval $(minikube docker-env)
 
 
 
+
+
+
+
 1. apply the initial deployment.yaml. kubectl apply -f
 2. Rebuild the image. The image contains hash value
 3. Update the yaml with the specific image
@@ -47,7 +51,61 @@ helm install myflask . --debug --dry-run # use dry run to see the helm chart val
 ```
 
 
+
+Installation Of Kubernetes On Server
+
+
+install openvpn on our server
+
+install docker runtime before install kubernetes <https://www.cloudsigma.com/how-to-install-operate-docker-on-ubuntu-in-the-public-cloud/>
+
+follow the website to install the kubernetes <https://www.cloudsigma.com/how-to-install-and-use-kubernetes-on-ubuntu-20-04/>
+
+
+kubectl apply -f <https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml>
+
+kubectl apply -f <https://raw.githubusercontent.com/coreos/flannel/master/Documentation/k8s-manifests/kube-flannel-rbac.yml>
+
+
+Download remote kubeConfig to local system
+
+## merge the master node config to the local .kube/config file
+
+```javascript
+scp -P 40110 user@ip:~:/home/ubs/.kube/config ~/Downloads/kubeconfig
+```
+
+ \n 
+
+```javascript
+cp ~/.kube/config ~/.kube/config.bak && KUBECONFIG=~/.kube/config:/home/ryan/Downloads/kubeconfig kubectl config view --flatten > /tmp/config && mv /tmp/config ~/.kube/config
+```
+
+
+
+```javascript
+scp -P 40110 user@remote_ip:/path/to/remote/kube/config ~/.kube/config
+```
+
+ \n 
+
+
+sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=0.0.0.0
+
+```javascript
+ssh -L 6443:10.60.0.4:6443 user@ip -p 40110
+```
+
+ \n 
+
+After installing this, i get the following message
+
+
 Installation Of Argo Workflow And ArgoCD To Build A Pipeline
+
+Create event source
+
+kubectl apply -f ci/event/eventsource.yaml -n staging
 
 
 
@@ -56,6 +114,13 @@ Use Argo Workflow To Create CI Pipeline
 
 
 Use ArgoCD to deploy the built image \n 
+
+Question: how can we use environment variable to update the image id in helmchat values.yaml?
+
+Antwort: set IMAGE_ID environment variable, then use
+
+
+
 
 
 
